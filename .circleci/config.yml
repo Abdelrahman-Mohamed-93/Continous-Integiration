@@ -29,6 +29,19 @@ jobs:
     steps:
       - run: echo world
 
+#Adding a job to use an environment variable
+  testing_env_vars:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $My_Env_Var_NAME
+
+
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -40,3 +53,7 @@ workflows:
       - print_world:
           requires:
             - print_hello
+
+  test-env-vars:
+    jobs:
+      - testing_env_vars
