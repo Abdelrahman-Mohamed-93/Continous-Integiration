@@ -45,9 +45,9 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "hello world" > ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci/output.txt
+      - run: echo "hello world" > ~/output.txt
       - persist_to_workspace:
-          root: ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci
+          root: ~/
           paths:
             - output.txt
 
@@ -56,8 +56,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci
-      - run: cat ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci/output.txt
+          at: ~/
+      - run: cat ~/output.txt
 
 
 # Invoke jobs via workflows
