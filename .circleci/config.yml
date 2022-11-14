@@ -40,6 +40,24 @@ jobs:
           command: |
             echo $My_Env_Var_NAME
 
+#Sharing files
+  save_hello_world_output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo "hello world" > ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci/output.txt
+      - persist_to_workspace:
+          root: ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci
+          paths:
+            - output.txt
+
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci
+      - run: cat ~/Desktop/DevOps_Bootcamp/Continous_Integiration/.circleci/output.txt
 
 
 # Invoke jobs via workflows
@@ -57,3 +75,10 @@ workflows:
   test-env-vars:
     jobs:
       - testing_env_vars
+
+  Sharing_files:
+    jobs:
+      - save_hello_world_output
+      - print_output_file:
+          requires:
+            - save_hello_world_output
