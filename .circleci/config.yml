@@ -74,16 +74,16 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
 
-  print_PLID_EV_job:
+  print_plid_ev_job:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id_EV
-  print_PLID_PV_job:
+      - print_pipeline_id_ev
+  print_plid_pv_job:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id_PV:
+      - print_pipeline_id_pv:
           id: << pipeline.id >>
 
 # Invoke jobs via workflows
@@ -111,8 +111,8 @@ workflows:
 
   my_PLID_EV:
     jobs:
-      - print_PLID_EV_job
+      - print_plid_ev_job
   my_PLID_PV:
     jobs:
-      - print_PLID_PV_job
+      - print_plid_pv_job
   
