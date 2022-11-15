@@ -109,10 +109,10 @@ workflows:
           requires:
             - save_hello_world_output
 
-  my_PLID_EV:
+  my_plid_ev:
     jobs:
       - print_plid_ev_job
-  my_PLID_PV:
+  my_plid_pv:
     jobs:
       - print_plid_pv_job
   
