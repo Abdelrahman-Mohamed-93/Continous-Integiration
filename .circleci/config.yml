@@ -85,6 +85,17 @@ jobs:
     steps:
       - print_pipeline_id_pv:
           id: << pipeline.id >>
+# Testing Job failures
+  job_failure:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: exit 1
+      # U can use return 1 as well
+      - run:
+          name: On error
+          command: echo "Hello Error!"
+          when: on_fail
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -116,3 +127,6 @@ workflows:
     jobs:
       - print_plid_pv_job
   
+  my_job_failure:
+    jobs:
+      - job_failure
